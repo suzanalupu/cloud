@@ -1,9 +1,9 @@
 <?php
 
-$servername = "online-shopping-server.mysql.database.azure.com";
-$username = "suzanalupu@online-shopping-server";
-$password = "Suzana@96";
-$db = "onlineshop";
+$servername = 'online-shopping-system.mysql.database.azure.com';
+$username = 'suzanalupu@online-shopping-server';
+$password = 'Suzana@96';
+$db = 'onlineshop';
 
 // Create connection
 
