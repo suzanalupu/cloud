@@ -1,7 +1,7 @@
 <?php
 
 $servername = 'online-shopping-system.mysql.database.azure.com';
-$username = 'suzanalupu@online-shopping-server';
+$username = 'suzanalupu@online-shopping-system';
 $password = 'Suzana@96';
 $db = 'onlineshop';
 
