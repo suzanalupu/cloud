@@ -16,7 +16,7 @@ function myfunction()
     <button hidden="" type="submit" id="success" data-modal="success" name="success" value="success"></button>
 </form>
 
-<h1 style="padding-left:400px; padding-top:200px;"><img src="../images/loading-x.gif" /></h1>
+<h1 style="padding-left:400px; padding-top:200px;"><img src="https://onlineshoppingsystem.blob.core.windows.net/shoppingsystem-images/loading-x.gif" /></h1>
 </body>
 </html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
