@@ -10,7 +10,7 @@ $result=mysqli_query($con,"select product_image from products where product_id='
 or die("query is incorrect...");
 
 list($picture)=mysqli_fetch_array($result);
-$path="../product_images/$picture";
+$path="https://onlineshoppingsystem.blob.core.windows.net/shoppingsystem-images/$picture";
 
 if(file_exists($path)==true)
 {
@@ -61,7 +61,7 @@ include "topheader.php";
 
                         while(list($product_id,$image,$product_name,$price)=mysqli_fetch_array($result))
                         {
-                        echo "<tr><td><img src='../product_images/$image' style='width:50px; height:50px; border:groove #000'></td><td>$product_name</td>
+                        echo "<tr><td><img src='https://onlineshoppingsystem.blob.core.windows.net/shoppingsystem-images/$image' style='width:50px; height:50px; border:groove #000'></td><td>$product_name</td>
                         <td>$price</td>
                         <td>
 
