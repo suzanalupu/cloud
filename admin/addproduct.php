@@ -2,8 +2,8 @@
 session_start();
 include("../db.php");
 # imports
-use MicrosoftAzure\Storage\Blob\Models\CreateBlockBlobOptions;
-use MicrosoftAzure\Storage\Blob\BlobRestProxy;
+//use MicrosoftAzure\Storage\Blob\Models\CreateBlockBlobOptions;
+//use MicrosoftAzure\Storage\Blob\BlobRestProxy;
 
 
 function storageAddFile($containerName, $fileName)
