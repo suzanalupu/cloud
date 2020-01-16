@@ -153,6 +153,7 @@
                         $pro_title = $row['product_title'];
                         $pro_price = $row['product_price'];
                         $pro_image = $row['product_image'];
+		    	$pro_image = strtolower(string $pro_image);
 
                         $cat_name = $row["cat_title"];
 
