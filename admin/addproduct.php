@@ -1,6 +1,61 @@
   <?php
 session_start();
 include("../db.php");
+# imports
+use MicrosoftAzure\Storage\Blob\Models\CreateBlockBlobOptions;
+use MicrosoftAzure\Storage\Blob\BlobRestProxy;
+
+
+function storageAddFile($containerName, $fileName)
+{
+    # Setup a specific instance of an Azure::Storage::Client
+    $connectionString = "DefaultEndpointsProtocol=https;AccountName=".getenv('STORAGE_ACCOUNT_NAME').";AccountKey=".getenv('STORAGE_ACCOUNT_KEY');
+    // Create blob client.
+    $blobClient = BlobRestProxy::createBlobService($connectionString);
+
+    $handle = @fopen($fileName, "r");
+    if($handle)
+    {
+        $options = new CreateBlockBlobOptions();
+        $mime = NULL;
+
+        try
+        {
+            // identify mime type
+            $mimes = new \Mimey\MimeTypes;
+            $mime = $mimes->getMimeType(pathinfo($fileName, PATHINFO_EXTENSION));
+            // set content type
+            $options->setContentType($mime);
+        }
+        catch ( Exception $e )
+        {
+            error_log("Failed to read mime from '".$fileName.": ". $e);
+        } 
+
+        try
+        {
+            if($mime)
+            {
+                $cacheTime = getCacheTimeByMimeType($mime);
+                if($cacheTime)
+                {
+                    $options->setCacheControl("public, max-age=".$cacheTime);
+                }
+            }
+
+            $blobClient->createBlockBlob($containerName, $fileName, $handle, $options);
+        } catch ( Exception $e ) {
+            error_log("Failed to upload file '".$fileName."' to storage: ". $e);
+        } 
+
+        @fclose($handle);
+        return true;
+    } else {        
+        error_log("Failed to open file '".$fileName."' to upload to storage.");
+        return false;
+    }
+}
+/* final function*/
 
 
 if(isset($_POST['btn_save']))
