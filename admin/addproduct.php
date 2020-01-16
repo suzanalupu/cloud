@@ -9,7 +9,7 @@ use MicrosoftAzure\Storage\Blob\BlobRestProxy;
 function storageAddFile($containerName, $fileName)
 {
     # Setup a specific instance of an Azure::Storage::Client
-    $connectionString = "DefaultEndpointsProtocol=https;AccountName=".getenv('STORAGE_ACCOUNT_NAME').";AccountKey=".getenv('STORAGE_ACCOUNT_KEY');
+    $connectionString = "DefaultEndpointsProtocol=https;AccountName=".getenv('onlineshoppingsystem').";);
     // Create blob client.
     $blobClient = BlobRestProxy::createBlobService($connectionString);
 
@@ -79,8 +79,9 @@ if($picture_type=="image/jpeg" || $picture_type=="image/jpg" || $picture_type=="
 	if($picture_size<=50000000)
 	
 		$pic_name=time()."_".$picture_name;
-		move_uploaded_file($picture_tmp_name,"https://onlineshoppingsystem.blob.core.windows.net/shoppingsystem-images/".$pic_name);
-		
+		$containerName="shoppingsystem-images";
+		//move_uploaded_file($picture_tmp_name,"https://onlineshoppingsystem.blob.core.windows.net/shoppingsystem-images/".$pic_name);
+		storageAddFile($containerName, $picture_name);
 mysqli_query($con,"insert into products (product_cat, product_brand,product_title,product_price, product_desc, product_image,product_keywords) values ('$product_type','$brand','$product_name','$price','$details','$pic_name','$tags')") or die ("query incorrect");
 
  header("location: sumit_form.php?success=1");
