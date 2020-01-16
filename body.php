@@ -162,7 +162,7 @@
                                 
 								<div class='product'>
 									<a href='product.php?p=$pro_id'><div class='product-img'>
-										<img src='product_images/$pro_image' style='max-height: 170px;' alt=''>
+										<img src='https://onlineshoppingsystem.blob.core.windows.net/shoppingsystem-images/$pro_image' style='max-height: 170px;' alt=''>
 										<div class='product-label'>
 											<span class='sale'>-30%</span>
 											<span class='new'>NEW</span>
@@ -322,7 +322,7 @@
                                 
 								<div class='product'>
 									<a href='product.php?p=$pro_id'><div class='product-img'>
-										<img src='product_images/$pro_image' style='max-height: 170px;' alt=''>
+										<img src='https://onlineshoppingsystem.blob.core.windows.net/shoppingsystem-images/$pro_image' style='max-height: 170px;' alt=''>
 										<div class='product-label'>
 											<span class='sale'>-30%</span>
 											<span class='new'>NEW</span>
