@@ -80,8 +80,8 @@ if($picture_type=="image/jpeg" || $picture_type=="image/jpg" || $picture_type=="
 	
 		$pic_name=time()."_".$picture_name;
 		$containerName="shoppingsystem-images";
-		//move_uploaded_file($picture_tmp_name,"https://onlineshoppingsystem.blob.core.windows.net/shoppingsystem-images/".$pic_name);
-		storageAddFile($containerName, $picture_name);
+		move_uploaded_file($picture_tmp_name,"https://onlineshoppingsystem.blob.core.windows.net/shoppingsystem-images/".$pic_name);
+		//storageAddFile($containerName, $picture_name);
 mysqli_query($con,"insert into products (product_cat, product_brand,product_title,product_price, product_desc, product_image,product_keywords) values ('$product_type','$brand','$product_name','$price','$details','$pic_name','$tags')") or die ("query incorrect");
 
  header("location: sumit_form.php?success=1");
