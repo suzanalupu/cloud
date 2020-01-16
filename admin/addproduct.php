@@ -1,61 +1,6 @@
   <?php
 session_start();
 include("../db.php");
-# imports
-//use MicrosoftAzure\Storage\Blob\Models\CreateBlockBlobOptions;
-//use MicrosoftAzure\Storage\Blob\BlobRestProxy;
-
-
-function storageAddFile($containerName, $fileName)
-{
-    # Setup a specific instance of an Azure::Storage::Client
-    $connectionString = "DefaultEndpointsProtocol=https;AccountName=".getenv('onlineshoppingsystem').";);
-    // Create blob client.
-    $blobClient = BlobRestProxy::createBlobService($connectionString);
-
-    $handle = @fopen($fileName, "r");
-    if($handle)
-    {
-        $options = new CreateBlockBlobOptions();
-        $mime = NULL;
-
-        try
-        {
-            // identify mime type
-            $mimes = new \Mimey\MimeTypes;
-            $mime = $mimes->getMimeType(pathinfo($fileName, PATHINFO_EXTENSION));
-            // set content type
-            $options->setContentType($mime);
-        }
-        catch ( Exception $e )
-        {
-            error_log("Failed to read mime from '".$fileName.": ". $e);
-        } 
-
-        try
-        {
-            if($mime)
-            {
-                $cacheTime = getCacheTimeByMimeType($mime);
-                if($cacheTime)
-                {
-                    $options->setCacheControl("public, max-age=".$cacheTime);
-                }
-            }
-
-            $blobClient->createBlockBlob($containerName, $fileName, $handle, $options);
-        } catch ( Exception $e ) {
-            error_log("Failed to upload file '".$fileName."' to storage: ". $e);
-        } 
-
-        @fclose($handle);
-        return true;
-    } else {        
-        error_log("Failed to open file '".$fileName."' to upload to storage.");
-        return false;
-    }
-}
-/* final function*/
 
 
 if(isset($_POST['btn_save']))
@@ -79,9 +24,8 @@ if($picture_type=="image/jpeg" || $picture_type=="image/jpg" || $picture_type=="
 	if($picture_size<=50000000)
 	
 		$pic_name=time()."_".$picture_name;
-		$containerName="shoppingsystem-images";
 		move_uploaded_file($picture_tmp_name,"https://onlineshoppingsystem.blob.core.windows.net/shoppingsystem-images/".$pic_name);
-		//storageAddFile($containerName, $picture_name);
+		
 mysqli_query($con,"insert into products (product_cat, product_brand,product_title,product_price, product_desc, product_image,product_keywords) values ('$product_type','$brand','$product_name','$price','$details','$pic_name','$tags')") or die ("query incorrect");
 
  header("location: sumit_form.php?success=1");
